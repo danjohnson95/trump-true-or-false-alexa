@@ -19,6 +19,19 @@ export default class GameService {
         return quote
     }
 
+    public shouldEndGame (): boolean {
+        const session = this.attributesManager.getSessionAttributes()
+        const count = session.count || 0
+
+        return count > 5
+    }
+
+    public getCorrectCount (): number {
+        const session = this.attributesManager.getSessionAttributes()
+
+        return session.score
+    }
+
     public checkAnswer (answer: boolean): boolean {
         const session = this.attributesManager.getSessionAttributes()
 
@@ -26,7 +39,15 @@ export default class GameService {
             throw new Error('No question has been asked yet!')
         }
 
-        return session.answer === answer
+        const outcome = session.answer === answer
+
+        if (outcome) {
+            session.score += 1
+        }
+
+        this.attributesManager.setSessionAttributes(session)
+
+        return outcome
     }
 
     public repeatQuestion (): string {
@@ -40,9 +61,15 @@ export default class GameService {
     }
 
     private storeQuestion (quote: string, answer: boolean): void {
+        const current = this.attributesManager.getSessionAttributes()
+        let count = current.count || 0
+        let score = current.score || 0
+
         this.attributesManager.setSessionAttributes({
             lastQuestion: quote,
-            answer: answer
+            answer: answer,
+            count: count += 1,
+            score: score
         })
     }
 

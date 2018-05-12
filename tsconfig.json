@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap" : true,
+    "inlineSources" : false,
+    "alwaysStrict" : true,
+    "removeComments" : false,
+    "lib": ["es2017"]
+  }  
+}

@@ -12,7 +12,7 @@ export default class LaunchIntentRequestHandler implements RequestHandler {
 
     handle (handlerInput: HandlerInput): Response {
         const gameService = new GameService(handlerInput.attributesManager)
-        const welcomeMessage = 'Welcome. I\'m going to give you some quotes - some will have been said by Trump, some will not. Give me your answer by responding with "True" or "False".'
+        const welcomeMessage = 'Welcome. I\'m going to give you 5 quotes - some will have been said by Trump, some will not. Give me your answer by responding with "True" or "False".'
         const firstQuestion = 'Here\'s your first question:'
         const quote = gameService.getQuote()
         const constructedMessage = welcomeMessage + ' ' + firstQuestion + ' ' + quote

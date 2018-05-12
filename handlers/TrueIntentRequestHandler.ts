@@ -11,6 +11,29 @@ export default class TrueIntentRequestHandler implements RequestHandler {
 
     handle (handlerInput: HandlerInput): Response {
         const gameService = new GameService(handlerInput.attributesManager)
-            
+        const correct = gameService.checkAnswer(true)
+        const response = correct ? this.getCorrectResponse() : this.getIncorrectResponse()
+        const nextQuestion = gameService.getQuote()
+
+        if (gameService.shouldEndGame()) {
+            const correctAnswerCount = gameService.getCorrectCount()
+
+            return handlerInput.responseBuilder
+                .speak(response + 'That\'s the end of the game. You got ' + correctAnswerCount + ' out of 5.')
+                .getResponse()
+        }
+
+        return handlerInput.responseBuilder
+            .speak(response + ' Next quote: ' + nextQuestion)
+            .reprompt(nextQuestion)
+            .getResponse()       
+    }
+
+    getCorrectResponse (): string {
+        return 'Correct!'
+    }
+
+    getIncorrectResponse (): string {
+        return 'Incorrect.'
     }
 }
