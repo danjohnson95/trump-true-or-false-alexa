@@ -23,7 +23,7 @@ export default class GameService {
         const session = this.attributesManager.getSessionAttributes()
         const count = session.count || 0
 
-        return count > 5
+        return count >= 5
     }
 
     public getCorrectCount (): number {
