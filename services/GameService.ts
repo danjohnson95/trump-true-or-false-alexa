@@ -1,5 +1,5 @@
-import * as TrueQuotes from '../data/TrueQuotes'
-import * as FalseQuotes from '../data/FalseQuotes'
+import * as TrueQuotes from '../data/TrueQuotes.json'
+import * as FalseQuotes from '../data/FalseQuotes.json'
 import { AttributesManager } from 'ask-sdk-core';
 
 export default class GameService {
@@ -27,13 +27,13 @@ export default class GameService {
     }
 
     private getRandomTrueQuote (): string {
-        const index = this.getRandomIndex(TrueQuotes)
+        const index = this.getRandomIndex(<any>TrueQuotes)
 
         return TrueQuotes[index]
     }
 
     private getRandomFalseQuote (): string {
-        const index = this.getRandomIndex(FalseQuotes)
+        const index = this.getRandomIndex(<any>FalseQuotes)
 
         return FalseQuotes[index]
     }
