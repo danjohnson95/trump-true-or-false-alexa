@@ -1,4 +1,5 @@
 import { SkillBuilders } from 'ask-sdk-core'
+import RepeatIntentRequestHandler from './handlers/RepeatIntentRequestHandler'
 
 exports.handler = SkillBuilders
     .custom()
@@ -6,6 +7,7 @@ exports.handler = SkillBuilders
         new LaunchIntentRequestHandler,
         new TrueIntentRequestHandler,
         new FalseIntentRequestHandler,
+        new RepeatIntentRequestHandler,
         new StopIntentRequestHandler
     )
     .lambda()

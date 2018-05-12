@@ -29,6 +29,16 @@ export default class GameService {
         return session.answer === answer
     }
 
+    public repeatQuestion (): string {
+        const session = this.attributesManager.getSessionAttributes()
+
+        if (!session) {
+            throw new Error('No question has been asked yet!')
+        }
+
+        return session.lastQuestion
+    }
+
     private storeQuestion (quote: string, answer: boolean): void {
         this.attributesManager.setSessionAttributes({
             lastQuestion: quote,
