@@ -13,7 +13,6 @@ export default class TrueIntentRequestHandler implements RequestHandler {
         const gameService = new GameService(handlerInput.attributesManager)
         const correct = gameService.checkAnswer(true)
         const response = correct ? this.getCorrectResponse() : this.getIncorrectResponse()
-        const nextQuestion = gameService.getQuote()
 
         if (gameService.shouldEndGame()) {
             const correctAnswerCount = gameService.getCorrectCount()
@@ -22,6 +21,8 @@ export default class TrueIntentRequestHandler implements RequestHandler {
                 .speak(response + 'That\'s the end of the game. You got ' + correctAnswerCount + ' out of 5.')
                 .getResponse()
         }
+
+        const nextQuestion = gameService.getQuote()
 
         return handlerInput.responseBuilder
             .speak(response + ' Next quote: ' + nextQuestion)
